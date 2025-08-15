@@ -85,8 +85,8 @@ from google.protobuf.json_format import MessageToJson
 from pubsub import pub # type: ignore[import-untyped]
 from tabulate import tabulate
 
-from meshtastic.node import Node
-from meshtastic.util import DeferredExecution, Timeout, catchAndIgnore, fixme, stripnl
+from .node import Node
+from .util import DeferredExecution, Timeout, catchAndIgnore, fixme, stripnl
 
 from .protobuf import (
     admin_pb2,
