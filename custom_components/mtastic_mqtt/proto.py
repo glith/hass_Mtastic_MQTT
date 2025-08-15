@@ -36,6 +36,16 @@ def _as_telemetry(obj, envelope):
             "relative_humidity": obj.environment_metrics.relative_humidity,
             "barometric_pressure": obj.environment_metrics.barometric_pressure,
             "gas_resistance": obj.environment_metrics.gas_resistance,
+            "lux": obj.environment_metrics.lux,
+        })
+    elif type_ == "power_metrics":
+        return ("power_metrics", {
+            "ch1_voltage": obj.power_metrics.ch1_voltage,
+            "ch1_current": obj.power_metrics.ch1_current,
+            "ch2_voltage": obj.power_metrics.ch2_voltage,
+            "ch2_current": obj.power_metrics.ch2_current,
+            "ch3_voltage": obj.power_metrics.ch3_voltage,
+            "ch3_current": obj.power_metrics.ch3_current,
         })
     return (None, {})
 
