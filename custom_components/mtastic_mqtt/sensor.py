@@ -20,6 +20,13 @@ async def async_setup_entry(hass, entry, async_setup_entities):
         _TelemetryRelativeHumidity(coordinator),
         _TelemetryBarometricPressure(coordinator),
         _TelemetryGasResistance(coordinator),
+        _TelemetryLux(coordinator),
+        _PowerChannel1Voltage(coordinator),
+        _PowerChannel1Current(coordinator),
+        _PowerChannel2Voltage(coordinator),
+        _PowerChannel2Current(coordinator),
+        _PowerChannel3Voltage(coordinator),
+        _PowerChannel3Current(coordinator)
     ])
 
 class _TelemetryBattery(BaseEntity, sensor.SensorEntity):
@@ -227,5 +234,131 @@ class _TelemetryGasResistance(BaseEntity, sensor.SensorEntity):
     def native_value(self) -> float | None:
         if tel := self.coordinator.data.get("environment_metrics"):
             if (value := tel.get("gas_resistance")) > 0:
+                return value
+        return None
+
+class _TelemetryLux(BaseEntity, sensor.SensorEntity):
+
+    def __init__(self, coordinator):
+        super().__init__(coordinator)
+        self.with_name(f"tel_lux", "Illuminance")
+        self._attr_device_class = sensor.SensorDeviceClass.ILLUMINANCE
+        self._attr_state_class = "measurement"
+        self._attr_native_unit_of_measurement = "lx"
+        self._attr_suggested_display_precision = 1
+        self._attr_entity_registry_enabled_default = False
+
+    @property
+    def native_value(self) -> float | None:
+        if tel := self.coordinator.data.get("environment_metrics"):
+            if (value := tel.get("lux")) > 0:
+                return value
+        return None
+        
+class _PowerChannel1Voltage(BaseEntity, sensor.SensorEntity):
+
+    def __init__(self, coordinator):
+        super().__init__(coordinator)
+        self.with_name(f"power_ch1_voltage", "Channel 1 Voltage")
+        self._attr_device_class = sensor.SensorDeviceClass.VOLTAGE
+        self._attr_state_class = "measurement"
+        self._attr_native_unit_of_measurement = "V"
+        self._attr_suggested_display_precision = 1
+        self._attr_entity_registry_enabled_default = False
+
+    @property
+    def native_value(self) -> float | None:
+        if tel := self.coordinator.data.get("power_metrics"):
+            if (value := tel.get("ch1_voltage")) > 0:
+                return value
+        return None
+        
+class _PowerChannel1Current(BaseEntity, sensor.SensorEntity):
+
+    def __init__(self, coordinator):
+        super().__init__(coordinator)
+        self.with_name(f"power_ch1_current", "Channel 1 Current")
+        self._attr_device_class = sensor.SensorDeviceClass.CURRENT
+        self._attr_state_class = "measurement"
+        self._attr_native_unit_of_measurement = "mA"
+        self._attr_suggested_display_precision = 1
+        self._attr_entity_registry_enabled_default = False
+
+    @property
+    def native_value(self) -> float | None:
+        if tel := self.coordinator.data.get("power_metrics"):
+            if (value := tel.get("ch1_current")) > 0:
+                return value
+        return None
+
+class _PowerChannel2Voltage(BaseEntity, sensor.SensorEntity):
+
+    def __init__(self, coordinator):
+        super().__init__(coordinator)
+        self.with_name(f"power_ch2_voltage", "Channel 2 Voltage")
+        self._attr_device_class = sensor.SensorDeviceClass.VOLTAGE
+        self._attr_state_class = "measurement"
+        self._attr_native_unit_of_measurement = "V"
+        self._attr_suggested_display_precision = 1
+        self._attr_entity_registry_enabled_default = False
+
+    @property
+    def native_value(self) -> float | None:
+        if tel := self.coordinator.data.get("power_metrics"):
+            if (value := tel.get("ch2_voltage")) > 0:
+                return value
+        return None
+        
+class _PowerChannel2Current(BaseEntity, sensor.SensorEntity):
+
+    def __init__(self, coordinator):
+        super().__init__(coordinator)
+        self.with_name(f"power_ch2_current", "Channel 2 Current")
+        self._attr_device_class = sensor.SensorDeviceClass.CURRENT
+        self._attr_state_class = "measurement"
+        self._attr_native_unit_of_measurement = "mA"
+        self._attr_suggested_display_precision = 1
+        self._attr_entity_registry_enabled_default = False
+
+    @property
+    def native_value(self) -> float | None:
+        if tel := self.coordinator.data.get("power_metrics"):
+            if (value := tel.get("ch2_current")) > 0:
+                return value
+        return None
+        
+class _PowerChannel3Voltage(BaseEntity, sensor.SensorEntity):
+
+    def __init__(self, coordinator):
+        super().__init__(coordinator)
+        self.with_name(f"power_ch3_voltage", "Channel 3 Voltage")
+        self._attr_device_class = sensor.SensorDeviceClass.VOLTAGE
+        self._attr_state_class = "measurement"
+        self._attr_native_unit_of_measurement = "V"
+        self._attr_suggested_display_precision = 1
+        self._attr_entity_registry_enabled_default = False
+
+    @property
+    def native_value(self) -> float | None:
+        if tel := self.coordinator.data.get("power_metrics"):
+            if (value := tel.get("ch3_voltage")) > 0:
+                return value
+        return None
+        
+class _PowerChannel3Current(BaseEntity, sensor.SensorEntity):
+
+    def __init__(self, coordinator):
+        super().__init__(coordinator)
+        self.with_name(f"power_ch3_current", "Channel 3 Current")
+        self._attr_device_class = sensor.SensorDeviceClass.CURRENT
+        self._attr_state_class = "measurement"
+        self._attr_native_unit_of_measurement = "mA"
+        self._attr_suggested_display_precision = 1
+        self._attr_entity_registry_enabled_default = False
+
+    @property
+    def native_value(self) -> float | None:
+        if tel := self.coordinator.data.get("power_metrics"):
+            if (value := tel.get("ch3_current")) > 0:
                 return value
         return None
