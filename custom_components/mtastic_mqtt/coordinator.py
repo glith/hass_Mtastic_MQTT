@@ -7,7 +7,7 @@ from homeassistant.components.mqtt import client as mqtt_client
 from homeassistant.util import json, dt
 from homeassistant.helpers import storage
 
-from .meshtastic.protobuf import mesh_pb2, mqtt_pb2, portnums_pb2, telemetry_pb2
+from meshtastic.protobuf import mesh_pb2, mqtt_pb2, portnums_pb2, telemetry_pb2
 
 from .constants import DOMAIN
 from .proto import convert_envelope_to_json, try_encrypt_envelope
