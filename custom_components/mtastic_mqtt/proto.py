@@ -1,4 +1,4 @@
-from .meshtastic.protobuf import mesh_pb2, mqtt_pb2, portnums_pb2, telemetry_pb2
+from meshtastic import mesh_pb2, mqtt_pb2, portnums_pb2, telemetry_pb2
 
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 from cryptography.hazmat.backends import default_backend
