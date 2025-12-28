@@ -178,7 +178,7 @@ class _TelemetryTemperature(BaseEntity, sensor.SensorEntity):
     @property
     def native_value(self) -> float | None:
         if tel := self.coordinator.data.get("environment_metrics"):
-            if (value := tel.get("temperature")) > 0:
+            if (value := tel.get("temperature")) > -20:
                 return value
         return None
 
